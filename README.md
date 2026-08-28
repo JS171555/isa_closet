@@ -1,78 +1,280 @@
-# Isa Closet — Loja estática + Supabase
+# ✦ Isa Closet
 
-Frontend em **HTML + CSS + JavaScript puro**, preparado para publicação no **GitHub Pages** e com dados compartilhados entre clientes por meio do **Supabase**.
+> E-commerce front-end responsivo para uma boutique de moda feminina, com catálogo dinâmico, sacola de compras, integração com WhatsApp e painel administrativo conectado ao Supabase.
 
-A identidade visual foi preservada: tons creme/rosé, marrom suave, tipografia editorial, bastante espaço em branco e linguagem de boutique. O layout foi revisado para mobile, com menu hambúrguer e navegação lateral.
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-ready-222222?style=for-the-badge&logo=github)](https://pages.github.com/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6%2B-F7DF1E?style=for-the-badge&logo=javascript&logoColor=111111)](https://developer.mozilla.org/docs/Web/JavaScript)
+[![Supabase](https://img.shields.io/badge/Supabase-backend-3ECF8E?style=for-the-badge&logo=supabase&logoColor=111111)](https://supabase.com/)
+[![GSAP](https://img.shields.io/badge/GSAP-animations-88CE02?style=for-the-badge&logo=greensock&logoColor=111111)](https://gsap.com/)
 
-## Recursos
+---
 
-- Loja pública responsiva para mobile, tablet e desktop.
-- Hero com vídeo aleatório entre `001.mp4` e `005.mp4`.
-- Catálogo público vindo do banco de dados.
-- Categorias e filtros.
-- Página/modal de produto com galeria, descrição, preços e tamanhos.
-- Sacola local do cliente.
-- Pedido pronto para WhatsApp.
-- Painel administrativo protegido por **Supabase Auth**.
-- Cadastro, edição, exclusão e ativação/desativação de produtos.
-- Upload múltiplo de fotos para o **Supabase Storage**.
-- Compressão das fotos no navegador para WebP antes do envio.
-- Configuração do nome da loja e WhatsApp pelo painel.
+## 📌 Sobre o projeto
+
+O **Isa Closet** foi desenvolvido para transformar uma vitrine de moda em uma experiência de compra simples, elegante e funcional.
+
+A aplicação utiliza um front-end **100% estático**, publicado no GitHub Pages, enquanto o **Supabase** fornece os recursos necessários para persistência de dados, autenticação e armazenamento de imagens.
+
+O projeto foi pensado com foco em:
+
+- experiência de navegação em dispositivos móveis e desktop;
+- catálogo administrável sem editar o código-fonte;
+- apresentação visual inspirada em boutiques de moda;
+- fluxo de compra rápido, com finalização via WhatsApp;
+- organização de produtos, preços, promoções, tamanhos e imagens;
+- controle de acesso para operações administrativas.
+
+---
+
+## ✨ Principais funcionalidades
+
+### 🛍️ Loja pública
+
+- Catálogo carregado dinamicamente do Supabase.
+- Filtro de produtos por categoria.
+- Destaques dos produtos.
+- Modal de detalhes com galeria de imagens.
+- Seleção de tamanho antes de adicionar à sacola.
+- Exibição de preço normal e promocional.
+- Indicador de promoção.
+- Sacola persistida no `localStorage`.
+- Controle de quantidade dos itens.
+- Cálculo automático do total.
+- Checkout gerando mensagem pronta para o WhatsApp.
+- Menu mobile com navegação lateral.
+- Hero com vídeos aleatórios.
+- Fallback automático para imagens indisponíveis.
+- Suporte a `prefers-reduced-motion`.
+
+### 🔐 Painel administrativo
+
+- Login utilizando **Supabase Auth**.
+- Validação de acesso administrativo.
+- Dashboard com indicadores do catálogo.
+- Cadastro de produtos.
+- Edição de produtos existentes.
+- Exclusão de produtos.
+- Ativação e desativação de produtos.
+- Pesquisa no catálogo administrativo.
+- Definição da ordem de exibição.
+- Cadastro de tamanhos disponíveis.
+- Upload de múltiplas imagens.
+- Compressão das imagens no navegador antes do upload.
+- Armazenamento das imagens no Supabase Storage.
+- Atualização do nome da loja.
+- Configuração do WhatsApp.
 - Recuperação de senha por e-mail.
-- RLS no Postgres e políticas de Storage.
-- Sem Node.js e sem backend próprio.
 
-## Estrutura
+---
+
+## 🧱 Stack utilizada
+
+| Tecnologia | Utilização |
+|---|---|
+| **HTML5** | Estrutura semântica das páginas |
+| **CSS3** | Layout, responsividade e identidade visual |
+| **JavaScript ES6+** | Lógica da aplicação e interações |
+| **Supabase** | Banco de dados, autenticação e storage |
+| **PostgreSQL** | Persistência dos produtos e configurações |
+| **Supabase Auth** | Autenticação do painel administrativo |
+| **Supabase Storage** | Armazenamento das imagens dos produtos |
+| **Row Level Security (RLS)** | Controle de acesso aos dados |
+| **GSAP** | Animações e transições |
+| **localStorage** | Persistência local da sacola |
+| **WhatsApp API (`wa.me`)** | Finalização do pedido |
+
+---
+
+## 🏗️ Arquitetura
 
 ```text
-isa-closet/
-├─ index.html
-├─ admin.html
-├─ README.md
-├─ css/
-│  ├─ style.css
-│  └─ admin.css
-├─ js/
-│  ├─ config.js
-│  ├─ store.js
-│  └─ admin.js
-├─ supabase/
-│  └─ setup.sql
-└─ assets/
-   ├─ branding/
-   │  └─ logo.webp
-   ├─ demo/
-   │  ├─ look-verde.webp
-   │  └─ look-conforto.webp
-   └─ videos/
-      ├─ 001.mp4
-      ├─ 002.mp4
-      ├─ 003.mp4
-      ├─ 004.mp4
-      └─ 005.mp4
+┌─────────────────────────────┐
+│        GitHub Pages         │
+│     HTML + CSS + JavaScript │
+└──────────────┬──────────────┘
+               │
+               ▼
+      ┌───────────────────┐
+      │     Supabase      │
+      ├───────────────────┤
+      │ PostgreSQL        │
+      │ Authentication    │
+      │ Storage           │
+      │ RLS Policies      │
+      └─────────┬─────────┘
+                │
+                ▼
+       ┌──────────────────┐
+       │ Painel Admin     │
+       │ CRUD de produtos │
+       └──────────────────┘
+
+Cliente ──► Catálogo ──► Sacola ──► WhatsApp
 ```
 
-## Configuração única antes de publicar
+A proposta elimina a necessidade de um servidor Node.js ou de uma API própria para o funcionamento do catálogo.
 
-O GitHub Pages é somente hospedagem estática. Para ter catálogo e administração compartilhados, o projeto usa Supabase como banco/auth/storage.
+---
 
-### 1. Criar o projeto no Supabase
+## 📂 Estrutura do projeto
 
-Crie um projeto no Supabase e abra **SQL Editor**.
+```text
+isa_closet/
+├── index.html
+├── admin.html
+│
+├── css/
+│   ├── style.css
+│   └── admin.css
+│
+├── js/
+│   ├── config.js
+│   ├── store.js
+│   └── admin.js
+│
+├── assets/
+│   ├── branding/
+│   │   └── logo.webp
+│   ├── demo/
+│   │   ├── look-verde.webp
+│   │   └── look-conforto.webp
+│   └── videos/
+│       ├── 001.mp4
+│       ├── 002.mp4
+│       ├── 003.mp4
+│       ├── 004.mp4
+│       └── 005.mp4
+│
+└── supabase/
+    └── setup.sql
+```
 
-Cole e execute o arquivo:
+---
+
+## 🗃️ Modelo de dados
+
+O banco utiliza três tabelas principais:
+
+### `products`
+
+Responsável pelo catálogo.
+
+Principais campos:
+
+```text
+id
+name
+category
+description
+price
+promo
+sizes
+images
+display_order
+active
+created_at
+updated_at
+```
+
+### `store_settings`
+
+Armazena as configurações básicas da loja:
+
+```text
+id
+store_name
+whatsapp
+updated_at
+```
+
+### `admin_users`
+
+Relaciona usuários autenticados ao acesso administrativo:
+
+```text
+user_id
+email
+created_at
+```
+
+Além disso, o projeto cria o bucket `product-images` no Supabase Storage para os arquivos das imagens.
+
+---
+
+## 🔒 Segurança
+
+A aplicação utiliza **Supabase Auth + Row Level Security (RLS)** para separar operações públicas das administrativas.
+
+### Visitantes
+
+Podem:
+
+- consultar produtos ativos;
+- consultar as configurações públicas da loja;
+- visualizar imagens do catálogo.
+
+### Administradores autenticados
+
+Podem:
+
+- cadastrar produtos;
+- editar produtos;
+- excluir produtos;
+- ativar ou ocultar produtos;
+- enviar imagens;
+- alterar configurações da loja.
+
+### Regra importante
+
+O navegador deve utilizar somente a **Publishable/Anon Key** do Supabase.
+
+> Nunca coloque uma chave `service_role` no código do front-end.
+
+As políticas de acesso e a configuração do banco estão documentadas em:
 
 ```text
 supabase/setup.sql
 ```
 
-Ele cria as tabelas, índices, função de administração, RLS, bucket de imagens e políticas de acesso.
+---
 
-### 2. Criar o administrador
+## ⚙️ Configuração
 
-No Supabase, abra **Authentication → Users** e crie o usuário que será o administrador, com e-mail e senha.
+### 1. Criar o projeto no Supabase
 
-Depois volte ao SQL Editor e execute, trocando o e-mail:
+Crie um projeto em:
+
+https://supabase.com/
+
+Depois abra o **SQL Editor** e execute:
+
+```text
+supabase/setup.sql
+```
+
+Esse script cria:
+
+- tabelas;
+- índices;
+- função de verificação administrativa;
+- políticas RLS;
+- bucket de imagens;
+- políticas do Storage;
+- triggers de atualização.
+
+---
+
+### 2. Criar o usuário administrador
+
+No Supabase:
+
+```text
+Authentication → Users
+```
+
+Crie o usuário administrativo.
+
+Depois associe o usuário à tabela `admin_users`:
 
 ```sql
 insert into public.admin_users (user_id, email)
@@ -82,17 +284,19 @@ where lower(email) = lower('admin@seudominio.com')
 on conflict (user_id) do nothing;
 ```
 
-O frontend não possui senha administrativa fixa. A autenticação é feita pelo Supabase Auth.
+Substitua o e-mail pelo usuário real.
 
-### 3. Configurar o frontend
+---
 
-Abra:
+### 3. Configurar o Supabase no front-end
+
+Edite:
 
 ```text
 js/config.js
 ```
 
-Preencha:
+Exemplo:
 
 ```js
 window.ISA_CONFIG = Object.freeze({
@@ -101,65 +305,213 @@ window.ISA_CONFIG = Object.freeze({
 });
 ```
 
-Use a **publishable/anon key pública**, nunca a `service_role` no navegador.
+Use somente a chave pública do projeto.
 
-### 4. Configurar URL do site para recuperação de senha
+---
 
-No Supabase, em Authentication → URL Configuration, cadastre a URL final do seu GitHub Pages como Site URL/Redirect URL.
+### 4. Configurar recuperação de senha
+
+No Supabase, configure:
+
+```text
+Authentication
+→ URL Configuration
+```
+
+Cadastre a URL final do `admin.html`.
 
 Exemplo:
 
 ```text
-https://SEU_USUARIO.github.io/SEU_REPOSITORIO/admin.html
+https://seuusuario.github.io/seu-repositorio/admin.html
 ```
 
-Se usar domínio próprio, use o domínio real.
-
-### 5. Adicionar os vídeos
-
-Coloque os vídeos na pasta:
+Com domínio próprio:
 
 ```text
-assets/videos/
+https://seudominio.com.br/admin.html
 ```
 
-com estes nomes:
+---
+
+## 🚀 Deploy no GitHub Pages
+
+O projeto não possui etapa de build.
+
+Não é necessário:
+
+```bash
+npm install
+```
+
+Nem:
+
+```bash
+npm run build
+```
+
+Nem Node.js para servir o front-end.
+
+### Publicação
+
+1. Envie os arquivos do projeto para o repositório.
+2. Abra **Settings → Pages**.
+3. Selecione o branch principal.
+4. Escolha `/(root)`.
+5. Salve a configuração.
+6. Aguarde a publicação do GitHub Pages.
+
+A arquitetura fica:
 
 ```text
-001.mp4
-002.mp4
-003.mp4
-004.mp4
-005.mp4
+GitHub Pages
+      +
+   Supabase
+      =
+Loja funcional
 ```
 
-O site sorteia um vídeo e, ao terminar, sorteia outro.
+---
 
-## Publicar no GitHub Pages
+## 📸 Fluxo da aplicação
 
-1. Crie um repositório no GitHub.
-2. Envie o conteúdo desta pasta para a raiz do repositório.
-3. Em **Settings → Pages**, selecione o branch principal e `/ (root)`.
-4. Acesse a URL gerada pelo GitHub.
+### Cliente
 
-Não é necessário `npm install`, Node.js, build ou servidor próprio.
+```text
+Home
+  ↓
+Catálogo
+  ↓
+Filtro por categoria
+  ↓
+Detalhes do produto
+  ↓
+Escolha do tamanho
+  ↓
+Adicionar à sacola
+  ↓
+Revisar pedido
+  ↓
+WhatsApp
+```
 
-## Modelo de segurança
+### Administrador
 
-O navegador usa apenas a chave pública do Supabase. O acesso de escrita é protegido por **Supabase Auth + Row Level Security**.
+```text
+Login
+  ↓
+Dashboard
+  ↓
+Produtos
+  ├── Criar
+  ├── Editar
+  ├── Excluir
+  └── Ativar / Ocultar
+  ↓
+Configurações
+  ├── Nome da loja
+  └── WhatsApp
+```
 
-- Visitantes podem ler somente produtos ativos.
-- Administradores autenticados podem criar, editar e excluir produtos.
-- Visitantes podem visualizar as imagens públicas do catálogo.
-- Somente administradores autenticados podem enviar, substituir e excluir imagens.
-- As credenciais privilegiadas do Supabase não são usadas no frontend.
+---
 
-## Observação importante sobre produção
+## 🎨 Interface e experiência
 
-Mesmo sendo uma aplicação 100% estática no frontend, o catálogo não fica preso ao navegador: produtos e imagens são salvos no Supabase. Assim, uma alteração feita pelo administrador passa a valer para todos os clientes.
+O projeto utiliza uma identidade visual editorial inspirada em boutiques de moda, combinando:
 
-O único passo que não pode ser automatizado dentro de um ZIP é a criação da sua própria conta/projeto Supabase e o preenchimento das credenciais públicas desse projeto, porque elas são exclusivas da sua conta.
+- tipografia serifada para títulos;
+- tipografia sans-serif para informações;
+- bastante espaço negativo;
+- composição minimalista;
+- cartões de produto;
+- navegação adaptada para mobile;
+- microinterações e transições com GSAP.
 
-## Configuração obrigatória antes do deploy
+A interface foi estruturada para manter a experiência visual consistente entre telas grandes e pequenas.
 
-O arquivo `js/config.js` usa a URL e a Publishable Key do seu próprio projeto Supabase. Não coloque `service_role` no frontend. Depois de configurar esses dois valores e executar `supabase/setup.sql`, publique a pasta no GitHub Pages.
+---
+
+## 🧠 Decisões técnicas
+
+### Por que GitHub Pages?
+
+O front-end não depende de renderização no servidor, permitindo hospedagem simples, rápida e de baixo custo.
+
+### Por que Supabase?
+
+O projeto precisava de:
+
+- banco de dados;
+- autenticação;
+- armazenamento de imagens;
+- regras de acesso;
+- atualização centralizada do catálogo.
+
+O Supabase permite atender essas necessidades sem criar e manter um backend próprio.
+
+### Por que localStorage?
+
+A sacola pode ser mantida no navegador sem exigir persistência de pedido no banco. O checkout é convertido em uma mensagem pronta para WhatsApp.
+
+---
+
+## 🛠️ Melhorias futuras
+
+Algumas evoluções planejadas para o projeto:
+
+- [ ] Controle de estoque por produto/tamanho.
+- [ ] Histórico de pedidos.
+- [ ] Integração com gateway de pagamento.
+- [ ] Dashboard com métricas de vendas.
+- [ ] SEO avançado por produto.
+- [ ] PWA e suporte offline parcial.
+- [ ] Gestão de cupons.
+- [ ] Ordenação avançada do catálogo.
+- [ ] Analytics de conversão.
+- [ ] Separação de ambientes de desenvolvimento e produção.
+
+---
+
+## 📋 Requisitos
+
+Para executar o projeto localmente, basta utilizar um servidor HTTP estático.
+
+Exemplos:
+
+```bash
+python -m http.server 8000
+```
+
+ou utilizar uma extensão como **Live Server** no VS Code.
+
+> Abrir diretamente via `file://` pode causar problemas com recursos externos e autenticação.
+
+---
+
+## 📄 Licença
+
+Este projeto foi desenvolvido para fins de portfólio e/ou uso comercial específico da **Isa Closet**.
+
+A licença de uso pode ser adaptada conforme a necessidade do projeto.
+
+---
+
+## 👨‍💻 Autor
+
+**Junior Santos**
+
+Desenvolvedor Web focado em:
+
+`JavaScript` · `Node.js` · `Python` · `Frontend` · `Sistemas Web`
+
+GitHub:
+
+https://github.com/JS171555
+
+---
+
+## ⭐ Projeto
+
+Desenvolvido com foco em transformar requisitos de negócio em uma aplicação web funcional, responsiva e administrável.
+
+**Isa Closet — moda, catálogo e operação em uma única aplicação.**
