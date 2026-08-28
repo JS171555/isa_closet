@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f7eee9">
+  <meta name="description" content="Isa Closet — moda feminina leve, elegante e versátil.">
+  <title>Isa Closet Moda feminina</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="store">
+  <div class="video-hero" aria-hidden="true">
+    <video id="heroVideo" class="hero-video" autoplay muted playsinline preload="metadata"></video>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#inicio" aria-label="Isa Closet">
+      <img src="assets/branding/logo.webp" alt="Isa Closet">
+    </a>
+
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <a href="#inicio">Início</a>
+      <a href="#novidades">Novidades</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#sobre">Sobre</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="cartButton" type="button" aria-label="Abrir sacola">
+        <span aria-hidden="true">♡</span><b id="cartCount">0</b>
+      </button>
+      <button class="menu-btn" id="menuButton" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-head">
+      <span>ISA CLOSET</span>
+      <button class="close-btn" id="closeMenu" type="button" aria-label="Fechar menu">×</button>
+    </div>
+    <nav class="mobile-nav" aria-label="Navegação mobile">
+      <a href="#inicio">Início <span>01</span></a>
+      <a href="#novidades">Novidades <span>02</span></a>
+      <a href="#catalogo">Catálogo <span>03</span></a>
+      <a href="#sobre">Sobre <span>04</span></a>
+      <a href="admin.html">Administração <span>↗</span></a>
+    </nav>
+    <p class="mobile-menu-note">Leveza para vestir quem você é.</p>
+  </aside>
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <p class="eyebrow">ISA CLOSET</p>
+        <h1>Leveza para vestir<br><em>quem você é.</em></h1>
+        <p class="hero-copy">Peças femininas para compor looks confortáveis, modernos e cheios de personalidade.</p>
+        <a class="primary-btn" href="#catalogo">Ver coleção</a>
+      </div>
+      <div class="hero-bottom-note">NOVO • ESSENCIAL • VERSÁTIL</div>
+    </section>
+
+    <section class="section" id="novidades">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">SELEÇÃO ISA</p>
+          <h2>Peças que chegam<br><em>para ficar.</em></h2>
+        </div>
+        <a href="#catalogo" class="text-link">Ver tudo ↗</a>
+      </div>
+      <div class="feature-grid" id="featuredGrid"></div>
+    </section>
+
+    <section class="section catalog-section" id="catalogo">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">CATÁLOGO</p>
+          <h2>Escolha seu<br><em>próximo look.</em></h2>
+        </div>
+      </div>
+      <div class="filters" id="filters"></div>
+      <div class="product-grid" id="productGrid"></div>
+      <div class="empty-state" id="emptyState" hidden>
+        <strong>Nenhuma peça encontrada.</strong>
+        <span>Cadastre produtos no painel administrativo.</span>
+      </div>
+    </section>
+
+    <section class="editorial" id="sobre">
+      <div class="editorial-copy">
+        <p class="eyebrow">ISA CLOSET</p>
+        <h2>Moda sem exagero.<br><em>Beleza nos detalhes.</em></h2>
+        <p>Uma curadoria pensada para o dia a dia: peças fáceis de combinar, caimento confortável e aquela estética delicada que não precisa gritar para ser notada.</p>
+        <a href="#catalogo" class="text-link">Conhecer coleção ↗</a>
+      </div>
+      <div class="editorial-card">
+        <span>CONJUNTO</span>
+        <strong>ESTILO<br>CONFORTO<br>LEVEZA</strong>
+        <small>Feito para acompanhar seus momentos.</small>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <span class="footer-brand">Isa Closet</span>
+      <p>Moda feminina • Brasil</p>
+    </div>
+    <a href="admin.html">Área administrativa ↗</a>
+  </footer>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="drawer-head">
+      <div><p class="eyebrow">SEU PEDIDO</p><h3>Sacola</h3></div>
+      <button class="close-btn" id="closeCart" type="button" aria-label="Fechar sacola">×</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Total</span><strong id="cartTotal">R$ 0,00</strong></div>
+      <button class="primary-btn full" id="checkoutButton" type="button">Enviar pedido no WhatsApp</button>
+      <p class="tiny-note">O pedido será aberto no WhatsApp com os produtos e tamanhos escolhidos.</p>
+    </div>
+  </aside>
+
+  <div class="modal-backdrop" id="productBackdrop"></div>
+  <section class="product-modal" id="productModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Detalhes do produto">
+    <button class="close-btn modal-close" id="closeProduct" type="button" aria-label="Fechar">×</button>
+    <div id="modalContent"></div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/store.js"></script>
+</body>
+</html>

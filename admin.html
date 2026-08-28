@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f7eee9">
+  <title>Isa Closet Administração</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body data-page="admin">
+  <header class="admin-header">
+    <a class="brand" href="index.html" aria-label="Voltar para loja"><img src="assets/branding/logo.webp" alt="Isa Closet"></a>
+    <div class="admin-header-actions"><a href="index.html" class="text-link">Ver loja ↗</a><button id="logoutBtn" class="ghost-btn" type="button">Sair</button></div>
+  </header>
+
+  <main class="admin-shell">
+    <section id="loginView" class="admin-login card">
+      <p class="eyebrow">ISA CLOSET</p>
+      <h1>Painel administrativo</h1>
+      <p>Gerencie produtos, fotos, preços e promoções.</p>
+      <form id="loginForm" class="stack-form" autocomplete="on">
+        <label>E-mail <input id="adminEmail" type="email" autocomplete="username" placeholder="admin@seudominio.com" required></label>
+        <label>Senha <input id="adminPassword" type="password" autocomplete="current-password" placeholder="Sua senha" required></label>
+        <button class="primary-btn" type="submit">Entrar</button>
+        <button class="link-button" id="forgotPasswordBtn" type="button">Esqueci minha senha</button>
+        <p class="form-message" id="loginMessage" role="status"></p>
+      </form>
+    </section>
+
+    <section id="dashboardView" hidden>
+      <div class="admin-title-row">
+        <div><p class="eyebrow">DASHBOARD</p><h1>Controle da loja</h1></div>
+        <button id="newProductBtn" class="primary-btn" type="button">+ Novo produto</button>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><span>Produtos ativos</span><strong id="statProducts">0</strong></div>
+        <div class="stat-card"><span>Em promoção</span><strong id="statPromos">0</strong></div>
+        <div class="stat-card"><span>Fotos no catálogo</span><strong id="statImages">0</strong></div>
+      </div>
+
+      <div class="admin-grid">
+        <section class="card">
+          <div class="card-head"><div><p class="eyebrow">CATÁLOGO</p><h2>Produtos</h2></div><input id="productSearch" class="compact-search" type="search" placeholder="Buscar..."></div>
+          <div id="adminProducts" class="admin-products"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-head"><div><p class="eyebrow">CONFIGURAÇÕES</p><h2>Loja & WhatsApp</h2></div></div>
+          <form id="settingsForm" class="stack-form">
+            <label>Nome da loja <input id="storeNameInput" type="text" maxlength="80" required></label>
+            <label>WhatsApp do vendedor <input id="whatsappInput" type="tel" inputmode="tel" placeholder="5511999999999" required></label>
+            <button class="secondary-btn" type="submit">Salvar configurações</button>
+            <p class="form-message" id="settingsMessage" role="status"></p>
+          </form>
+          <hr>
+          <div class="security-note"><p class="eyebrow">SEGURANÇA</p><p>O login é feito pelo Supabase Auth. Não existe senha administrativa salva no JavaScript ou no navegador.</p></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="adminModalBackdrop"></div>
+  <section class="admin-modal" id="productFormModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Produto">
+    <button class="close-btn modal-close" id="closeAdminModal" type="button" aria-label="Fechar">×</button>
+    <div class="modal-scroll">
+      <p class="eyebrow">CATÁLOGO</p><h2 id="productModalTitle">Novo produto</h2>
+      <form id="productForm" class="product-form">
+        <input type="hidden" id="productId">
+        <div class="form-two"><label>Nome<input id="productName" type="text" maxlength="100" required></label><label>Categoria<select id="productCategory"><option>Conjuntos</option><option>Blusas</option><option>Shorts</option><option>Vestidos</option><option>Calças</option><option>Acessórios</option></select></label></div>
+        <div class="form-three"><label>Preço<input id="productPrice" type="number" min="0" step="0.01" required></label><label>Preço promocional<input id="productPromo" type="number" min="0" step="0.01" placeholder="Opcional"></label><label>Ordem<input id="productOrder" type="number" min="0" step="1" value="0"></label></div>
+        <label>Descrição<textarea id="productDescription" rows="4" maxlength="1200" placeholder="Fale sobre tecido, caimento e estilo..."></textarea></label>
+        <label class="active-toggle"><span>Status do produto</span><span><input id="productActive" type="checkbox" checked> Produto visível na loja</span></label>
+        <fieldset><legend>Tamanhos disponíveis</legend><div class="size-checks"><label><input type="checkbox" value="PP"> PP</label><label><input type="checkbox" value="P"> P</label><label><input type="checkbox" value="M"> M</label><label><input type="checkbox" value="G"> G</label><label><input type="checkbox" value="GG"> GG</label></div></fieldset>
+        <label>Fotos do produto<input id="productImages" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple><small>As imagens são comprimidas no navegador e enviadas para o Storage do Supabase.</small></label>
+        <div id="imagePreview" class="image-preview"></div>
+        <p class="form-message" id="productMessage" role="status"></p>
+        <div class="form-actions"><button type="button" class="ghost-btn" id="cancelProduct">Cancelar</button><button type="submit" class="primary-btn">Salvar produto</button></div>
+      </form>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
